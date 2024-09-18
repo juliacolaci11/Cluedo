@@ -22,3 +22,6 @@ public class Arma {
     @Override
     public int hashCode() {
         return nombre.hashCode();
+    }
+}
+
