@@ -12,10 +12,12 @@ public class Juego {
     private Arma armaMortal;
     private Habitacion habitacionDelCrimen;
     private List<Jugador> jugadores;
+    private int turnoActual;
 
 
     Juego(List<Jugador> jugadores) {
         this.jugadores = jugadores;
+        this.turnoActual = 0;
         personajes = new ArrayList<>();
         armas = new ArrayList<>();
         habitaciones = new ArrayList<>();
@@ -185,6 +187,61 @@ public class Juego {
         }
         return habitacion;
     }
+
+    public static void limpiarPantalla() {
+        // Número de líneas en blanco que se imprimen
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
+    }
+    void realizarTurno() {
+        Scanner scanner = new Scanner(System.in);
+        Jugador jugadorActual = jugadores.get(turnoActual);
+
+        // Mostrar las cartas del jugador actual
+        mostrarDetallesJugador(jugadorActual);
+
+        // Mostrar las opciones disponibles para el jugador
+        System.out.println("Opciones disponibles para sugerir:");
+        System.out.println("Personajes: ");
+        for (Personaje personaje : personajes) {
+            if (!jugadorActual.getCartasPersonaje().contains(personaje)) {
+                System.out.println("  - " + personaje);
+            }
+        }
+
+        System.out.println("Armas: ");
+        for (Arma arma : armas) {
+            if (!jugadorActual.getCartasArma().contains(arma)) {
+                System.out.println("  - " + arma);
+            }
+        }
+
+        System.out.println("Habitaciones: ");
+        for (Habitacion habitacion : habitaciones) {
+            if (!jugadorActual.getCartasHabitacion().contains(habitacion)) {
+                System.out.println("  - " + habitacion);
+            }
+        }
+
+        System.out.println("Es el turno de " + jugadorActual.getNombre());
+
+        // Solicitar sugerencias por separado
+        Personaje sugeridoAsesino = obtenerPersonajeValido(scanner);
+        Arma sugeridoArma = obtenerArmaValida(scanner);
+        Habitacion sugeridaHabitacion = obtenerHabitacionValida(scanner);
+
+        hacerSugerencia(jugadorActual, sugeridoAsesino, sugeridoArma, sugeridaHabitacion);
+
+        // Esperar a que el jugador presione Enter antes de borrar la pantalla
+        System.out.println("Presiona Enter para continuar...");
+        scanner.nextLine(); // Espera la entrada del usuario
+
+        // Avanzar al siguiente turno
+        limpiarPantalla();
+        turnoActual = (turnoActual + 1) % jugadores.size();
+    }
+
 }
 
 
