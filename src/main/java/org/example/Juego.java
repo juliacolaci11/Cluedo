@@ -13,6 +13,7 @@ public class Juego {
     private Habitacion habitacionDelCrimen;
     private List<Jugador> jugadores;
 
+
     Juego(List<Jugador> jugadores) {
         this.jugadores = jugadores;
         personajes = new ArrayList<>();
@@ -79,3 +80,111 @@ public class Juego {
             }
         }
     }
+
+    void hacerSugerencia(Jugador jugador, Personaje sugeridoAsesino, Arma sugeridoArma, Habitacion sugeridaHabitacion) {
+        boolean acertoPersonaje = sugeridoAsesino.equals(asesino);
+        boolean acertoArma = sugeridoArma.equals(armaMortal);
+        boolean acertoHabitacion = sugeridaHabitacion.equals(habitacionDelCrimen);
+
+        System.out.println(jugador.getNombre() + " hace una sugerencia: " +
+                sugeridoAsesino + " en " + sugeridaHabitacion + " con " + sugeridoArma);
+
+        if (acertoPersonaje && acertoArma && acertoHabitacion) {
+            System.out.println("¡" + jugador.getNombre() + " ha resuelto el caso!");
+            System.out.println("¿Quieres volver a jugar o salir?");
+            System.out.println("1. Volver a jugar");
+            System.out.println("2. Salir");
+
+            Scanner scanner = new Scanner(System.in);
+            int opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    // Aquí puedes llamar al método que reinicie el juego o configurar una nueva ronda
+                    System.out.println("¡Preparándote para una nueva ronda!");
+                    break;
+                case 2:
+                    System.out.println("Gracias por jugar. ¡Hasta luego!");
+                    System.exit(0);  // Termina la aplicación
+                    break;
+                default:
+                    System.out.println("Opción no válida. El juego terminará.");
+                    System.exit(0);  // Termina la aplicación si la opción es inválida
+                    break;
+            }
+        } else {
+            if (acertoPersonaje) {
+                System.out.println("Acierto en el personaje: " + sugeridoAsesino);
+            }
+            if (acertoArma) {
+                System.out.println("Acierto en el arma: " + sugeridoArma);
+            }
+            if (acertoHabitacion) {
+                System.out.println("Acierto en la habitación: " + sugeridaHabitacion);
+            }
+            if (!acertoPersonaje && !acertoArma && !acertoHabitacion) {
+                System.out.println("Sugerencia incorrecta.");
+            }
+        }
+
+        // Opciones al final del juego
+
+    }
+
+    void mostrarDetallesJugador(Jugador jugador) {
+        System.out.println(jugador.getNombre() + " tiene las siguientes cartas:");
+        System.out.println("Personajes: " + jugador.getCartasPersonaje());
+        System.out.println("Armas: " + jugador.getCartasArma());
+        System.out.println("Habitaciones: " + jugador.getCartasHabitacion());
+    }
+
+    private Personaje obtenerPersonajeValido(Scanner scanner) {
+        boolean esValido = false;
+        Personaje personaje = null;
+        while (!esValido) {
+            System.out.println("Introduce la sugerencia para el personaje:");
+            String entrada = scanner.nextLine();
+            personaje = new Personaje(entrada);
+            if (personajes.contains(personaje)) {
+                esValido = true;
+            } else {
+                System.out.println("Opción inválida. Por favor, introduce un personaje válido.");
+            }
+        }
+        return personaje;
+    }
+
+    private Arma obtenerArmaValida(Scanner scanner) {
+        boolean esValido = false;
+        Arma arma = null;
+        while (!esValido) {
+            System.out.println("Introduce la sugerencia para el arma:");
+            String entrada = scanner.nextLine();
+            arma = new Arma(entrada);
+            if (armas.contains(arma)) {
+                esValido = true;
+            } else {
+                System.out.println("Opción inválida. Por favor, introduce un arma válida.");
+            }
+        }
+        return arma;
+    }
+
+    private Habitacion obtenerHabitacionValida(Scanner scanner) {
+        boolean esValido = false;
+        Habitacion habitacion = null;
+        while (!esValido) {
+            System.out.println("Introduce la sugerencia para la habitación:");
+            String entrada = scanner.nextLine();
+            habitacion = new Habitacion(entrada);
+            if (habitaciones.contains(habitacion)) {
+                esValido = true;
+            } else {
+                System.out.println("Opción inválida. Por favor, introduce una habitación válida.");
+            }
+        }
+        return habitacion;
+    }
+}
+
+
