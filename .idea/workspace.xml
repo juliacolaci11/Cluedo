@@ -4,19 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f4d177e-7b70-4511-b359-b08a957beb6f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Arma.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Habitacion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Juego.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Jugador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Personaje.java" afterDir="false" />
+    <list default="true" id="9f4d177e-7b70-4511-b359-b08a957beb6f" name="Changes" comment="Base del juego">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Habitacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Habitacion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,8 +20,25 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "juliacolaci11"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/juliacolaci11/Cluedo.git",
+    "accountId": "f95b65c0-a9ad-4031-914a-149e0e9bf3ef"
+  }
+}]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 2
 }]]></component>
@@ -45,7 +51,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "generando-base-del-juego",
     "kotlin-language-version-configured": "true",
     "onboarding.tips.debug.path": "C:/Users/Usuario.PC-INF-PRUEBA/IdeaProjects/Cluedo/src/main/java/org/example/Main.java"
   }
@@ -59,7 +65,20 @@
       <option name="presentableId" value="Default" />
       <updated>1726693398646</updated>
     </task>
+    <task id="LOCAL-00001" summary="Base del juego">
+      <option name="closed" value="true" />
+      <created>1726693789165</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1726693789165</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Base del juego" />
+    <option name="LAST_COMMIT_MESSAGE" value="Base del juego" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
