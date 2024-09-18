@@ -15,10 +15,12 @@ public class Personaje {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Arma arma = (Arma) o;
-        return nombre.equals(arma.nombre);
+        Personaje personaje = (Personaje) o;
+        return nombre.equals(personaje.nombre);
     }
 
     @Override
     public int hashCode() {
         return nombre.hashCode();
+    }
+}
