@@ -61,33 +61,20 @@ public class Juego {
     }
 
     private void asignarCartasEspeciales() {
-        Random random = new Random();
-        for (Jugador jugador : jugadores) {
-            String tipo = "";
-            int tipoRandom = random.nextInt(3); // 0, 1 o 2 para elegir el tipo
+        for (int i = 0; i < jugadores.size(); i++) {
+            Jugador jugador = jugadores.get(i);
+            String tipo = (i % 3 == 0) ? "Personaje" : (i % 3 == 1) ? "Arma" : "Habitación";
 
-            switch (tipoRandom) {
-                case 0:
-                    tipo = "Personaje";
-                    break;
-                case 1:
-                    tipo = "Arma";
-                    break;
-                case 2:
-                    tipo = "Habitación";
-                    break;
-            }
-
-            // Elegir un jugador objetivo que no sea el jugador actual
             Jugador jugadorObjetivo;
             do {
-                jugadorObjetivo = jugadores.get(random.nextInt(jugadores.size()));
+                jugadorObjetivo = jugadores.get((i + 1) % jugadores.size());
             } while (jugadorObjetivo == jugador);
 
             CartaEspecial cartaEspecial = new CartaEspecial(tipo, jugadorObjetivo);
             jugador.getCartasEspeciales().add(cartaEspecial);
         }
     }
+
 
     void usarCartaEspecial(Jugador jugadorActual) {
         Scanner scanner = new Scanner(System.in);
