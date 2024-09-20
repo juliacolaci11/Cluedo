@@ -82,6 +82,34 @@ public class Juego {
             }
         }
     }
+    private String obtenerMensajePorPersonaje(Personaje personaje) {
+        switch (personaje.toString()) {
+            case "Hechicera":
+                return "La Hechicera había sido rechazada por el rey, quien ignoró su oferta de poder mágico. "
+                        + "Con ganas de venganza, decidió asesinarlo para reclamar el reino y gobernar sin oposición.";
+
+            case "Licantropa":
+                return "La Licantropa había sido acusada de un crimen que no cometió. "
+                        + "El rey, en lugar de ayudarla, la dejó sola. "
+                        + "En la noche del baile, su rabia la llevó a actuar, buscando recuperar su lugar en la nobleza.";
+
+            case "Vampiro":
+                return "El Vampiro, hambriento de poder, había estado observando al rey. "
+                        + "Creyendo que el rey había arruinado a su familia, decidió acabar con él para vengar a los suyos y tomar el trono.";
+
+            case "Fantasma":
+                return "El Fantasma es el espíritu de un rey antiguo traicionado por su propio consejo. "
+                        + "Su ira se desata sobre el actual rey, que representa un linaje que él considera corrupto. "
+                        + "Busca justicia y quiere advertir a los poderosos del reino.";
+
+            case "Princesa":
+                return "La Princesa, atrapada en un matrimonio sin amor, deseaba una vida diferente. "
+                        + "Al ver que el rey ignoraba sus sueños, decidió que la única forma de escapar era eliminarlo y gobernar ella misma.";
+
+            default:
+                return "Motivo desconocido.";
+        }
+    }
 
     void hacerSugerencia(Jugador jugador, Personaje sugeridoAsesino, Arma sugeridoArma, Habitacion sugeridaHabitacion) {
         boolean acertoPersonaje = sugeridoAsesino.equals(asesino);
@@ -93,6 +121,7 @@ public class Juego {
 
         if (acertoPersonaje && acertoArma && acertoHabitacion) {
             System.out.println("¡" + jugador.getNombre() + " ha resuelto el caso!");
+            System.out.println(obtenerMensajePorPersonaje(asesino));
             System.out.println("¿Quieres volver a jugar o salir?");
             System.out.println("1. Volver a jugar");
             System.out.println("2. Salir");

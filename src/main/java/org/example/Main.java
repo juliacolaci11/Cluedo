@@ -8,7 +8,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Bienvenidos Al Clue!");
+        System.out.println("El aire estaba cargado de música y susurros, las luces de la luna danzaban a través de los grandes vitrales del salón real.\n"
+                + "El gran baile del reino, un evento que simbolizaba la paz entre las tierras, había convocado a sus más poderosos representantes.\n"
+                + "La atmósfera resplandecía con elegancia y poder. Esta noche, sin embargo, algo oscuro flotaba en el aire.\n"
+                + "Entre los asistentes, seis figuras, cada una más enigmática que la anterior, se mezclaban con la nobleza,\n"
+                + "pero sus miradas se cruzaban en un juego de sombras y desconfianza…\n"
+                + "Todo parecía perfecto, hasta que el sonido de una copa cayendo al suelo rompió la ilusión.\n"
+                + "Un grito desgarrador atravesó la música, y todos los ojos se volvieron hacia el trono.\n"
+                + "Allí, sólo quedaba la corona del rey y una nota: “¿Quién será el primero en descubrir cómo fue mi asesinato?”\n");
 
         // Solicitar el número de jugadores
         int numJugadores = obtenerNumeroDeJugadores(scanner);
