@@ -30,6 +30,8 @@ public class Main {
         }
 
         Juego juego = new Juego(jugadores);
+        System.out.println("Presiona Enter para comenzar a investigar...");
+        scanner.nextLine(); // Espera la entrada del usuario
 
         // Iniciar el bucle del juego
         while (true) {
@@ -43,7 +45,7 @@ public class Main {
         int numJugadores = 0;
 
         while (!entradaValida) {
-            System.out.print("¿Cuántos jugadores están participando? ");
+            System.out.print("¿Cuántos de ustedes se quedaron para investigar? ");
             String entrada = scanner.nextLine();
 
             if (esNumeroValido(entrada)) {
@@ -51,7 +53,7 @@ public class Main {
                 if (numJugadores >= 2 && numJugadores <= 4) {
                     entradaValida = true;
                 } else {
-                    System.out.println("Error: El número de jugadores debe estar entre 2 y 4. Por favor, intente de nuevo.");
+                    System.out.println("Lo sentimos, sólo pueden quedarse de 2 a 4 personas");
                 }
             } else {
                 System.out.println("Error: Entrada no válida. Debe ingresar un número entero.");

@@ -12,6 +12,7 @@ public class Juego {
     private Arma armaMortal;
     private Habitacion habitacionDelCrimen;
     private List<Jugador> jugadores;
+
     private int turnoActual;
 
 
@@ -31,6 +32,7 @@ public class Juego {
         personajes.add(new Personaje("Vampiro"));
         personajes.add(new Personaje("Fantasma"));
         personajes.add(new Personaje("Princesa"));
+
 
         // Inicializar armas
         armas.add(new Arma("Candelabro"));
@@ -54,7 +56,119 @@ public class Juego {
 
         // Repartir cartas a jugadores
         repartirCartas();
+        asignarCartasEspeciales();
+
     }
+
+    private void asignarCartasEspeciales() {
+        Random random = new Random();
+        for (Jugador jugador : jugadores) {
+            String tipo = "";
+            int tipoRandom = random.nextInt(3); // 0, 1 o 2 para elegir el tipo
+
+            switch (tipoRandom) {
+                case 0:
+                    tipo = "Personaje";
+                    break;
+                case 1:
+                    tipo = "Arma";
+                    break;
+                case 2:
+                    tipo = "Habitación";
+                    break;
+            }
+
+            // Elegir un jugador objetivo que no sea el jugador actual
+            Jugador jugadorObjetivo;
+            do {
+                jugadorObjetivo = jugadores.get(random.nextInt(jugadores.size()));
+            } while (jugadorObjetivo == jugador);
+
+            CartaEspecial cartaEspecial = new CartaEspecial(tipo, jugadorObjetivo);
+            jugador.getCartasEspeciales().add(cartaEspecial);
+        }
+    }
+
+    void usarCartaEspecial(Jugador jugadorActual) {
+        Scanner scanner = new Scanner(System.in);
+
+        if (jugadorActual.getCartasEspeciales().isEmpty()) {
+            System.out.println(jugadorActual.getNombre() + " no tiene cartas especiales disponibles.");
+            return;
+        }
+
+        Jugador jugadorObjetivo = null;
+        boolean jugadorValido = false;
+
+        while (!jugadorValido) {
+            System.out.println(jugadorActual.getNombre() + ", elige a qué jugador deseas ver una carta:");
+            for (Jugador jugador : jugadores) {
+                if (!jugador.equals(jugadorActual)) {
+                    System.out.println("- " + jugador.getNombre());
+                }
+            }
+
+            String nombreJugadorObjetivo = scanner.nextLine();
+
+            for (Jugador jugador : jugadores) {
+                if (jugador.getNombre().equalsIgnoreCase(nombreJugadorObjetivo)) {
+                    jugadorObjetivo = jugador;
+                    jugadorValido = true;
+                    break;
+                }
+            }
+
+            if (!jugadorValido) {
+                System.out.println("Jugador no encontrado. Por favor, intenta de nuevo.");
+            }
+        }
+
+        int tipoOpcion = 0;
+        boolean opcionValida = false;
+
+        while (!opcionValida) {
+            System.out.println("¿Qué tipo de carta deseas ver de " + jugadorObjetivo.getNombre() + "?");
+            System.out.println("1. Personaje");
+            System.out.println("2. Arma");
+            System.out.println("3. Habitación");
+
+            String entrada = scanner.nextLine();
+            try {
+                tipoOpcion = Integer.parseInt(entrada);
+                opcionValida = true; // Si llega aquí, la entrada es válida
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada no válida. Debes ingresar un número entero.");
+                opcionValida = false; // Mantener el bucle
+            }
+
+            switch (tipoOpcion) {
+                case 1:
+                    System.out.println("Revelando personaje de " + jugadorObjetivo.getNombre() + ": " + jugadorObjetivo.getCartasPersonaje());
+                    break;
+                case 2:
+                    System.out.println("Revelando arma de " + jugadorObjetivo.getNombre() + ": " + jugadorObjetivo.getCartasArma());
+                    break;
+                case 3:
+                    System.out.println("Revelando habitación de " + jugadorObjetivo.getNombre() + ": " + jugadorObjetivo.getCartasHabitacion());
+                    break;
+                default:
+                    System.out.println("Por favor, elige entre 1 y 3.");
+                    opcionValida = false; // Volver a pedir la opción
+                    break;
+            }
+        }
+
+        CartaEspecial cartaEspecial = jugadorActual.getCartasEspeciales().get(0);
+        if (jugadorActual.usarCartaEspecial(cartaEspecial)) {
+            System.out.println("Has usado una carta especial.");
+        } else {
+            System.out.println("No se pudo usar la carta especial.");
+        }
+    }
+
+
+
+
 
     private void repartirCartas() {
         List<Personaje> personajesRestantes = new ArrayList<>(personajes);
@@ -86,16 +200,19 @@ public class Juego {
         switch (personaje.toString()) {
             case "Hechicera":
                 return "La Hechicera había sido rechazada por el rey, quien ignoró su oferta de poder mágico. "
-                        + "Con ganas de venganza, decidió asesinarlo para reclamar el reino y gobernar sin oposición.";
+                        + "Con ganas de venganza, decidió asesinarlo para reclamar el reino " +
+                        "y gobernar sin oposición.";
 
             case "Licantropa":
                 return "La Licantropa había sido acusada de un crimen que no cometió. "
                         + "El rey, en lugar de ayudarla, la dejó sola. "
-                        + "En la noche del baile, su rabia la llevó a actuar, buscando recuperar su lugar en la nobleza.";
+                        + "En la noche del baile, su rabia la llevó a actuar, " +
+                        "buscando recuperar su lugar en la nobleza.";
 
             case "Vampiro":
                 return "El Vampiro, hambriento de poder, había estado observando al rey. "
-                        + "Creyendo que el rey había arruinado a su familia, decidió acabar con él para vengar a los suyos y tomar el trono.";
+                        + "Creyendo que el rey había arruinado a su familia, " +
+                        "decidió acabar con él para vengar a los suyos y tomar el trono.";
 
             case "Fantasma":
                 return "El Fantasma es el espíritu de un rey antiguo traicionado por su propio consejo. "
@@ -104,7 +221,8 @@ public class Juego {
 
             case "Princesa":
                 return "La Princesa, atrapada en un matrimonio sin amor, deseaba una vida diferente. "
-                        + "Al ver que el rey ignoraba sus sueños, decidió que la única forma de escapar era eliminarlo y gobernar ella misma.";
+                        + "Al ver que el rey ignoraba sus sueños, decidió que la única forma de escapar " +
+                        "era eliminarlo y gobernar ella misma.";
 
             default:
                 return "Motivo desconocido.";
@@ -131,7 +249,6 @@ public class Juego {
 
             switch (opcion) {
                 case 1:
-                    // Aquí puedes llamar al método que reinicie el juego o configurar una nueva ronda
                     System.out.println("¡Preparándote para una nueva ronda!");
                     break;
                 case 2:
@@ -147,10 +264,10 @@ public class Juego {
             if (acertoPersonaje) {
                 System.out.println("Acierto en el personaje: " + sugeridoAsesino);
             }
-            if (acertoArma) {
+            if (!acertoPersonaje && acertoArma) {
                 System.out.println("Acierto en el arma: " + sugeridoArma);
             }
-            if (acertoHabitacion) {
+            if (!acertoPersonaje && !acertoArma && acertoHabitacion) {
                 System.out.println("Acierto en la habitación: " + sugeridaHabitacion);
             }
             if (!acertoPersonaje && !acertoArma && !acertoHabitacion) {
@@ -229,6 +346,15 @@ public class Juego {
 
         // Mostrar las cartas del jugador actual
         mostrarDetallesJugador(jugadorActual);
+
+        // Preguntar si el jugador quiere usar una carta especial
+        System.out.println("¿Quieres usar una carta especial? (escribe s para usarla)");
+        String usarCartaEspecial = scanner.nextLine().trim().toLowerCase();
+
+        if (usarCartaEspecial.equals("s")) {
+            usarCartaEspecial(jugadorActual);
+        }
+
 
         // Mostrar las opciones disponibles para el jugador
         System.out.println("Opciones disponibles para sugerir:");
